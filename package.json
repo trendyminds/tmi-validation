@@ -1,0 +1,49 @@
+{
+  "name": "tmi-validation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/xo './index.js' --color",
+    "build": "yarn test && ./node_modules/.bin/webpack --progress"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hyperform": "0.9.6",
+    "vanilla-text-mask": "5.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "webpack": "^3.4.1",
+    "xo": "^0.18.2"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "xo": {
+    "space": true,
+    "envs": [
+      "browser"
+    ],
+    "rules": {
+      "new-cap": [
+        "error",
+        {
+          "properties": false
+        }
+      ],
+      "no-new": 0,
+      "no-useless-escape": 0,
+      "import/first": 0,
+      "unicorn/filename-case": 0,
+      "unicorn/explicit-length-check": 0,
+      "import/no-unassigned-import": 0,
+      "no-alert": 0
+    }
+  }
+}
