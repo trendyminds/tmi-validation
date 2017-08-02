@@ -1,11 +1,11 @@
 {
   "name": "tmi-validation",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/index.min.js",
   "scripts": {
     "test": "./node_modules/.bin/xo './index.js' --color",
-    "build": "yarn test && ./node_modules/.bin/webpack --progress"
+    "build": "yarn test && NODE_ENV=production ./node_modules/.bin/webpack -p --progress"
   },
   "author": "",
   "license": "ISC",

@@ -8,7 +8,7 @@ module.exports = {
 
   output: {
     path: __dirname + '/dist',
-    filename: 'index.js',
+    filename: 'index.min.js',
     library: 'TMIValidation',
     libraryTarget: 'umd'
   },

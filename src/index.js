@@ -1,4 +1,4 @@
-import hyperform from 'hyperform';
+import hyperform from 'hyperform/dist/hyperform.amd';
 import maskInput from 'vanilla-text-mask';
 
 export default class TMIValidation {
