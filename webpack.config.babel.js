@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: __dirname + '/dist',
     filename: 'index.js',
-    library: 'tmi-validation',
+    library: 'TMIValidation',
     libraryTarget: 'umd'
   },
 
