@@ -69,13 +69,9 @@ Take the following form code as an example. **Note:** This isn't necessarily the
 </form>
 ```
 
-### How to enable form validation
-The custom form validation we use on the site will begin working on this form after doing the following:
-
-1. Adding `data-validate` to the `<form>` tag.
-2. Adding HTML5 validation/custom validation rules
-
 ### Custom validation rules
+**Note**: You may also use the built-in HTML5 validation rules like `required`.
+
 Type            | Data Attribute                     | Error Message                                      | Requirements                                   |
 ----------------|------------------------------------|----------------------------------------------------|------------------------------------------------|
 **First Name**  | `data-validate-first-name`         | "Please enter your first name"                     | Required, must be 2 characters minimum         |
