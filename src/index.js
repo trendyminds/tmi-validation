@@ -10,10 +10,12 @@ export default class TMIValidation {
     this.$lastName = this.el.querySelectorAll('[data-validate-last-name]');
     this.$name = this.el.querySelectorAll('[data-validate-name]');
     this.$email = this.el.querySelectorAll('[data-validate-email]');
+    this.$optionalEmail = this.el.querySelectorAll('[data-validate-optional-email]');
     this.$zipCode = this.el.querySelectorAll('[data-validate-zip-code]');
     this.$phone = this.el.querySelectorAll('[data-validate-phone]');
     this.$optionalPhone = this.el.querySelectorAll('[data-validate-optional-phone]');
     this.$birthdate = this.el.querySelectorAll('[data-validate-birthdate]');
+    this.$date = this.el.querySelectorAll('[data-validate-date]');
     this.$comment = this.el.querySelectorAll('[data-validate-comment]');
     this.$type = this.el.querySelectorAll('[data-validate-type]');
     this.$address = this.el.querySelectorAll('[data-validate-city]');
@@ -57,10 +59,12 @@ export default class TMIValidation {
     this.forEach(this.$lastName, (i, el) => this.validateLastName(el));
     this.forEach(this.$name, (i, el) => this.validateName(el));
     this.forEach(this.$email, (i, el) => this.validateEmail(el));
+    this.forEach(this.$optionalEmail, (i, el) => this.validateOptionalEmail(el));
     this.forEach(this.$phone, (i, el) => this.validatePhone(el));
     this.forEach(this.$optionalPhone, (i, el) => this.validateOptionalPhone(el));
     this.forEach(this.$zipCode, (i, el) => this.validateZipCode(el));
     this.forEach(this.$birthdate, (i, el) => this.validateBirthdate(el));
+    this.forEach(this.$date, (i, el) => this.validateDate(el));
     this.forEach(this.$comment, (i, el) => this.validateComment(el));
     this.forEach(this.$city, (i, el) => this.validateCity(el));
     this.forEach(this.$type, (i, el) => this.validateType(el));
@@ -133,6 +137,28 @@ export default class TMIValidation {
     );
   }
 
+  validateOptionalEmail($el) {
+    hyperform.addValidator(
+      $el, element => {
+        if (element.value != '') {
+          const valid =
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(element.value);   // Value is a valid email
+
+          element.setCustomValidity(
+            valid ?
+              '' :
+              'Please enter a valid email'
+          );
+
+          return valid;
+        } else {
+          element.setCustomValidity('');
+          return true;
+        }
+      }
+    );
+  }
+
   validateType($el) {
     let pattern = '';
     const errorMsg = $el.dataset.validateError || 'This field is required';
@@ -195,11 +221,6 @@ export default class TMIValidation {
         return valid;
       }
     );
-
-    maskInput({
-      inputElement: $el,
-      mask: [/\d/, /\d/, /\d/, /\d/, /\d/]
-    });
   }
 
   validatePhone($el) {
@@ -217,13 +238,6 @@ export default class TMIValidation {
         return valid;
       }
     );
-
-    $el.placeholder = '(123) 456-7890';
-
-    maskInput({
-      inputElement: $el,
-      mask: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
-    });
   }
 
   validateCity($el) {
@@ -244,12 +258,25 @@ export default class TMIValidation {
   }
 
   validateOptionalPhone($el) {
-    $el.placeholder = '(123) 456-7890';
+    hyperform.addValidator(
+      $el, element => {
+        if (element.value != '') {
+          const valid =
+            /\([0-9][0-9][0-9]\) [0-9]*-[0-9][0-9][0-9][0-9]/.test(element.value); // Value is in (555) 555-5555 format
 
-    maskInput({
-      inputElement: $el,
-      mask: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
-    });
+          element.setCustomValidity(
+            valid ?
+              '' :
+              'Please enter a valid phone number'
+          );
+
+          return valid;
+        } else {
+          element.setCustomValidity('');
+          return true;
+        }
+      }
+    );
   }
 
   validateBirthdate($el) {
@@ -267,13 +294,23 @@ export default class TMIValidation {
         return valid;
       }
     );
+  }
 
-    $el.placeholder = '05/12/1990';
+  validateDate($el) {
+    hyperform.addValidator(
+      $el, element => {
+        const valid =
+          /(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d/.test(element.value); // Value is in 00/00/0000 format
 
-    maskInput({
-      inputElement: $el,
-      mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
-    });
+        element.setCustomValidity(
+          valid ?
+            '' :
+            'Please enter a valid date'
+        );
+
+        return valid;
+      }
+    );
   }
 
   validateComment($el) {
