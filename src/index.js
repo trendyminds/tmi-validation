@@ -240,6 +240,11 @@ export default class TMIValidation {
         return valid;
       }
     );
+
+    maskInput({
+      inputElement: $el,
+      mask: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+    });
   }
 
   validateCity($el) {
