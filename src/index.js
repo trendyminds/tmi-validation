@@ -22,7 +22,7 @@ export default class TMIValidation {
     this.$city = this.el.querySelectorAll('[data-validate-city]');
     this.$fieldLimit = this.el.querySelectorAll('[data-validate-field-limit]');
     this.$checkboxGroup = this.el.querySelectorAll('[data-validate-required-checkbox]');
-    this.$dupNum = this.el.querySelectorAll('[data-validate-duplicate-num]');
+    this.$dupNumCheck = this.el.querySelectorAll('[data-validate-duplicate-num-check]');
 
     // Kick off the instantiation process for the form
     this.initializeValidation();
@@ -71,7 +71,7 @@ export default class TMIValidation {
     this.forEach(this.$type, (i, el) => this.validateType(el));
     this.forEach(this.$fieldLimit, (i, el) => this.validateFieldLimit(el));
     this.forEach(this.$checkboxGroup, (i, el) => this.validateCheckboxGroup(el));
-    this.forEach(this.$dupNum, (i, el) => this.validateDupNum(el));
+    this.forEach(this.$dupNumCheck, (i, el) => this.validateDupNum(el));
   }
 
   validateFirstName($el) {
@@ -415,9 +415,9 @@ export default class TMIValidation {
   validateDupNum($el) {
     hyperform.addValidator(
       $el, element => {
-        const $dupNumCheck = this.el.querySelector('[data-validate-duplicate-num-check]');
+        const $dupNum = this.el.querySelector('[data-validate-duplicate-num]');
         let valid = false;
-        if ($el.value === $dupNumCheck.value) {
+        if ($el.value === $dupNum.value) {
           valid = true;
         }
 
