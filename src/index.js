@@ -22,6 +22,7 @@ export default class TMIValidation {
     this.$city = this.el.querySelectorAll('[data-validate-city]');
     this.$fieldLimit = this.el.querySelectorAll('[data-validate-field-limit]');
     this.$checkboxGroup = this.el.querySelectorAll('[data-validate-required-checkbox]');
+    this.$dupNum = this.el.querySelectorAll('[data-validate-duplicate-num]');
 
     // Kick off the instantiation process for the form
     this.initializeValidation();
@@ -70,6 +71,7 @@ export default class TMIValidation {
     this.forEach(this.$type, (i, el) => this.validateType(el));
     this.forEach(this.$fieldLimit, (i, el) => this.validateFieldLimit(el));
     this.forEach(this.$checkboxGroup, (i, el) => this.validateCheckboxGroup(el));
+    this.forEach(this.$dupNum, (i, el) => this.validateDupNum(el));
   }
 
   validateFirstName($el) {
@@ -408,5 +410,25 @@ export default class TMIValidation {
     } else {
       els.$feedbackEl.style = 'display: block';
     }
+  }
+
+  validateDupNum($el) {
+    hyperform.addValidator(
+      $el, element => {
+        const $dupNumCheck = this.el.querySelector('[data-validate-duplicate-num-check]');
+        let valid = false;
+        if ($el.value === $dupNumCheck.value) {
+          valid = true;
+        }
+
+        element.setCustomValidity(
+          valid ?
+            '' :
+            'Please enter the same number again'
+        );
+
+        return valid;
+      }
+    );
   }
 }
