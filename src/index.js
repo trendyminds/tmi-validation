@@ -285,6 +285,12 @@ export default class TMIValidation {
         }
       }
     );
+
+    maskInput({
+      inputElement: $el,
+      mask: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+      guide: true
+    });
   }
 
   validateBirthdate($el) {
@@ -330,7 +336,7 @@ export default class TMIValidation {
       inputElement: $el,
       mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
       guide: true
-    })
+    });
   }
 
   validateComment($el) {
