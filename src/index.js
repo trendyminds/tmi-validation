@@ -243,7 +243,8 @@ export default class TMIValidation {
 
     maskInput({
       inputElement: $el,
-      mask: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+      mask: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+      guide: true
     });
   }
 
@@ -284,6 +285,12 @@ export default class TMIValidation {
         }
       }
     );
+
+    maskInput({
+      inputElement: $el,
+      mask: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+      guide: true
+    });
   }
 
   validateBirthdate($el) {
@@ -301,6 +308,12 @@ export default class TMIValidation {
         return valid;
       }
     );
+
+    maskInput({
+      inputElement: $el,
+      mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
+      guide: true
+    })
   }
 
   validateDate($el) {
@@ -318,6 +331,12 @@ export default class TMIValidation {
         return valid;
       }
     );
+
+    maskInput({
+      inputElement: $el,
+      mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
+      guide: true
+    });
   }
 
   validateComment($el) {
