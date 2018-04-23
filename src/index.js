@@ -27,6 +27,7 @@ export default class TMIValidation {
     // Kick off the instantiation process for the form
     this.initializeValidation();
     this.setupCustomRules();
+    this.events();
   }
 
   forEach(array, callback, scope) {
@@ -72,6 +73,51 @@ export default class TMIValidation {
     this.forEach(this.$fieldLimit, (i, el) => this.validateFieldLimit(el));
     this.forEach(this.$checkboxGroup, (i, el) => this.validateCheckboxGroup(el));
     this.forEach(this.$dupNumCheck, (i, el) => this.validateDupNum(el));
+  }
+
+  events() {
+    this.dates = this.date = $('[data-validate-birthdate]');
+    this.forEach(this.dates, (i, el) => this.clearPlaceholder(el));
+
+    this.$phone.addEventListener('mouseover', this.showPlaceholder);
+    this.$phone.addEventListener('mouseout', this.removePlaceholder);
+    this.$phone.addEventListener('focus', this.showPlaceholder);
+    this.$phone.addEventListener('blur', this.removePlaceholder);
+
+    this.$optionalPhone.addEventListener('mouseover', this.showPlaceholder);
+    this.$optionalPhone.addEventListener('mouseout', this.removePlaceholder);
+    this.$optionalPhone.addEventListener('focus', this.showPlaceholder);
+    this.$optionalPhone.addEventListener('blur', this.removePlaceholder);
+
+    this.$birthdate.addEventListener('mouseover', this.showPlaceholder);
+    this.$birthdate.addEventListener('mouseout', this.removePlaceholder);
+    this.$birthdate.addEventListener('focus', this.showPlaceholder);
+    this.$birthdate.addEventListener('blur', this.removePlaceholder);
+
+    this.$date.addEventListener('mouseover', this.showPlaceholder);
+    this.$date.addEventListener('mouseout', this.removePlaceholder);
+    this.$date.addEventListener('focus', this.showPlaceholder);
+    this.$date.addEventListener('blur', this.removePlaceholder);
+  }
+
+  clearPlaceholder(el) {
+    el.setAttribute('placeholder', '');
+  }
+
+  showPlaceholder(e) {
+    if (e.target.hasAttribute('data-validate-phone')) {
+        if (!e.target.getAttribute('placeholder') || e.target.getAttribute('placeholder') === '') {
+          e.target.setAttribute('placeholder', '(___) ___-____');
+        }
+    } else if (e.target.hasAttribute('data-validate-birthdate')) {
+      if (!e.target.getAttribute('placeholder') || e.target.getAttribute('placeholder') === '') {
+        e.target.setAttribute('placeholder', '__/__/____');
+      }
+    }
+  }
+
+  removePlaceholder(e) {
+    e.target.setAttribute('placeholder', '');
   }
 
   validateFirstName($el) {
