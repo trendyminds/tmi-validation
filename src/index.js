@@ -241,6 +241,8 @@ export default class TMIValidation {
       }
     );
 
+    $el.placeholder = '(___) ___-____';
+
     maskInput({
       inputElement: $el,
       mask: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
@@ -286,6 +288,8 @@ export default class TMIValidation {
       }
     );
 
+    $el.placeholder = '(___) ___-____';
+
     maskInput({
       inputElement: $el,
       mask: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
@@ -309,6 +313,8 @@ export default class TMIValidation {
       }
     );
 
+    $el.placeholder = '__/__/____';
+
     maskInput({
       inputElement: $el,
       mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
@@ -331,6 +337,8 @@ export default class TMIValidation {
         return valid;
       }
     );
+
+    $el.placeholder = '__/__/____';
 
     maskInput({
       inputElement: $el,
