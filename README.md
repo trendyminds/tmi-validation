@@ -80,6 +80,7 @@ Type            | Data Attribute                     | Error Message            
 **Zip Code**    | `data-validate-zip-code`           | "Please enter a zip code"                          | Required, must be 5 characters, must be digits |
 **Phone**       | `data-validate-phone`              | "Please enter a valid phone number"                | Required, must be in a (XXX) XXX-XXXX format   |
 **Birthdate**   | `data-validate-birthdate`          | "Please enter a valid date of birth"               | Required, must be in a XX/XX/XXXX format       |
+**Birthdate (with hyphens)**   | `data-validate-birthdate-hyphen`          | "Please enter a valid date of birth"               | Required, must be in a XX-XX-XXXX format       |
 **Comment**     | `data-validate-comment`            | Standard "is required" message                     | Required, must be between 5-2500 characters    |
 **Field Limit** | `data-parsley-field-limit="1000"`  | "This field cannot be more than X characters long" | Required, cannot be more than 1000 characters  |
 
@@ -131,7 +132,7 @@ Type            | Data Attribute                     | Error Message            
     <label><input type="radio" name="favorite_pizza_topping" value="Cheese"> Cheese</label>
     <div data-validate-errors></div>
   </fieldset>
-  
+
 
   <label>
     Please write an explanation for your answers:
