@@ -17,6 +17,7 @@ export default class TMIValidation {
     this.$birthdate = this.el.querySelectorAll('[data-validate-birthdate]');
     this.$birthdateHyphen = this.el.querySelectorAll('[data-validate-birthdate-hyphen]');
     this.$date = this.el.querySelectorAll('[data-validate-date]');
+    this.$optionalDate = this.el.querySelectorAll('[data-validate-optional-date]');
     this.$comment = this.el.querySelectorAll('[data-validate-comment]');
     this.$type = this.el.querySelectorAll('[data-validate-type]');
     this.$address = this.el.querySelectorAll('[data-validate-city]');
@@ -68,6 +69,7 @@ export default class TMIValidation {
     this.forEach(this.$birthdate, (i, el) => this.validateBirthdate(el));
     this.forEach(this.$birthdateHyphen, (i, el) => this.validateBirthdateHyphen(el));
     this.forEach(this.$date, (i, el) => this.validateDate(el));
+    this.forEach(this.$optionalDate, (i, el) => this.validateOptionalDate(el));
     this.forEach(this.$comment, (i, el) => this.validateComment(el));
     this.forEach(this.$city, (i, el) => this.validateCity(el));
     this.forEach(this.$type, (i, el) => this.validateType(el));
@@ -362,6 +364,37 @@ export default class TMIValidation {
         );
 
         return valid;
+      }
+    );
+
+    $el.placeholder = '__/__/____';
+
+    maskInput({
+      inputElement: $el,
+      mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
+      guide: true
+    });
+  }
+
+
+  validateOptionalDate($el) {
+    hyperform.addValidator(
+      $el, element => {
+        if (element.value != '') {
+          const valid =
+            /(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d/.test(element.value); // Value is in 00/00/0000 format
+
+          element.setCustomValidity(
+            valid ?
+              '' :
+              'Please enter a valid date'
+          );
+
+          return valid;
+        } else {
+          element.setCustomValidity('');
+          return true;
+        }
       }
     );
 
